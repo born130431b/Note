@@ -1,0 +1,29 @@
+h1, h3{
+    text-align: center;
+}
+
+fieldset{
+    width: 50%;
+    margin: 0 auto;
+    border: 1px dashed black;
+    display: flex;
+    justify-content: center;
+}
+
+fieldset p { display: flex; justify-content: space-around;}
+
+legend {text-align: center;;}
+
+form input {
+    border: 0;
+    border-bottom: 1px solid #2962ff;
+    outline: none;
+}
+
+.button {
+    border: 0;
+    border-radius: 15px;
+    padding: 5px 10px;
+    background-color: #2962ff;
+    color: white
+}
