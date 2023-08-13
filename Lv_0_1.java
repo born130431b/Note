@@ -18,11 +18,11 @@ public class Lv_0_1 {
 	 * [1] = [1]
 	 * 
 	 * class Solution {
-    public int[] solution(int[] arr) {
-        int[] answer = {};
-        return answer;
-    }
-}
+	    public int[] solution(int[] arr) {
+	        int[] answer = {};
+	        return answer;
+	    }
+	}
 	 */
 	public static void main(String[] args) {
 		System.out.println("배열의 원소만큼 추가하기");
