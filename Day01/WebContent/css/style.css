@@ -1,0 +1,13 @@
+h1 {
+    text-align: center;
+    color: red;
+}
+
+fieldset {
+    width: 300px;
+    margin: 0 auto;
+}
+
+legend {
+    text-align: center;
+}
