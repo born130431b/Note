@@ -1,4 +1,4 @@
-package src.javaProject.controller.Study;
+package javaProject.controller.Study.Lv0;
 
 import java.util.*;
 import java.util.stream.IntStream;

@@ -1,6 +1,4 @@
-package javaProject.controller.Study;
-
-import java.util.Dictionary;
+package javaProject.controller.Study.Lv0;
 
 public class Lv_0_21 {
 	/*

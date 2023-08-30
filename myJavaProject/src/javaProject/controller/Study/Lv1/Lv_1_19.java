@@ -10,3 +10,9 @@ public class Lv_1_19 {
 	}
 
 }
+
+
+
+class Solution19 {
+	
+}

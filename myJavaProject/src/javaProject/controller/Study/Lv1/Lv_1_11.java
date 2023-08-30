@@ -1,5 +1,12 @@
 package javaProject.controller.Study.Lv1;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
+
 public class Lv_1_11 {
 	/*
 	 * 고객의 약관 동의를 얻어서 수집된 1~n번으로 분류되는 개인정보 n개가 있습니다. 약관 종류는 여러 가지 있으며 각 약관마다 개인정보 보관 유효기간이 정해져 있습니다.
@@ -64,12 +71,12 @@ public class Lv_1_11 {
 		String today = "2022.05.19";
 		String[] terms = {"A 6", "B 12", "C 3"};
 		String[] privacies = {"2021.05.02 A", "2021.07.01 B", "2022.02.19 C", "2022.02.20 C"};
-		System.out.println(st.solution(today, terms, privacies));
+		System.out.println(Arrays.toString(st.solution(today, terms, privacies)));
 		
 		String today2 = "2020.01.01";
 		String[] terms2 = {"Z 3", "D 5"};
 		String[] privacies2 = {"2019.01.01 D", "2019.11.15 Z", "2019.08.02 D", "2019.07.01 D", "2018.12.28 Z"};
-		System.out.println(st.solution(today2, terms2, privacies2));
+		System.out.println(Arrays.toString(st.solution(today2, terms2, privacies2)));
 		
 	}
 
@@ -78,7 +85,81 @@ public class Lv_1_11 {
 
 class Solution11 {
     public int[] solution(String today, String[] terms, String[] privacies) {
-        int[] answer = {};
+        
+    	/* 전체날짜를 일로 바꿔서 진행 */
+//    	 ArrayList arr = new ArrayList<>();
+//         // today 날짜 설정
+//         int todayInt = (Integer.parseInt(today.substring(0,4)) * 12 * 28)
+//                      + (Integer.parseInt(today.substring(5,7)) * 28)
+//                      + (Integer.parseInt(today.substring(8,10)));
+// 		
+//         // terms map 정리
+//         Map<String, Integer> termsMap = new HashMap<>();
+//         for(String str : terms) {
+//         	String[] termsTemp = str.split(" ");
+//         	termsMap.put(termsTemp[0], Integer.parseInt(termsTemp[1]) * 28);
+//         }
+//         
+//         // 비교 시작
+// 		for(int i=0; i< privacies.length; i++) {
+// 			String[] privaciesTemp = privacies[i].split(" ");
+//             int privaciesDate = (Integer.parseInt(privaciesTemp[0].substring(0,4)) * 12 * 28)
+//                               + (Integer.parseInt(privaciesTemp[0].substring(5,7)) * 28)
+//                               + (Integer.parseInt(privaciesTemp[0].substring(8,10)))
+//                               + termsMap.get(privaciesTemp[1])
+//                               - 1;
+// 			if(todayInt > privaciesDate) {
+//                 arr.add(i+1);
+//             }
+// 		}
+// 		int[] answer = new int[arr.size()];
+// 		
+// 		for(int i=0; i<arr.size(); i++) {
+// 			answer[i] = (int) arr.get(i);
+// 		}
+//         return answer;
+    	
+    	/* 캘린더를 사용해 진행 */
+    	ArrayList arr = new ArrayList<>();
+        // today 날짜 설정
+        int todayInt = Integer.parseInt(today.replace(".", ""));
+		
+        // terms map 정리
+        Map<String, Integer> termsMap = new HashMap<>();
+        for(String str : terms) {
+        	String[] termsTemp = str.split(" ");
+        	termsMap.put(termsTemp[0], Integer.parseInt(termsTemp[1]));
+        }
+        
+        // 비교 시작
+		for(int i=0; i< privacies.length; i++) {
+			String[] privaciesTemp = privacies[i].split(" ");
+			String[] privaciesDate = privaciesTemp[0].split("\\.");
+	        Calendar privaciesCalendar = Calendar.getInstance();
+	        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+			privaciesCalendar.set(Integer.parseInt(privaciesDate[0]), Integer.parseInt(privaciesDate[1]) - 1, Integer.parseInt(privaciesDate[2]));
+			
+			privaciesCalendar.add(Calendar.MONTH, termsMap.get(privaciesTemp[1]));
+			int temp = Integer.parseInt(sdf.format(privaciesCalendar.getTime()));
+			
+			if(todayInt >= temp) {
+				arr.add(i+1);
+			}
+		}
+		int[] answer = new int[arr.size()];
+ 		
+ 		for(int i=0; i<arr.size(); i++) {
+ 			answer[i] = (int) arr.get(i);
+ 		}
         return answer;
     }
 }
+
+
+
+
+
+
+
+
+

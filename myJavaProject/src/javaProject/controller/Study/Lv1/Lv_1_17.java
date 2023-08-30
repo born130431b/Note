@@ -10,3 +10,9 @@ public class Lv_1_17 {
 	}
 
 }
+
+
+
+class Solution17 {
+	
+}
