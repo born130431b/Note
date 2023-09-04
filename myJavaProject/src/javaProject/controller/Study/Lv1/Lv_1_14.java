@@ -40,6 +40,9 @@ public class Lv_1_14 {
 		int[][] board3 = {{1, 1, 1, 1, 1}, {1, 1, 1, 1, 1}, {1, 1, 1, 1, 1}, {1, 1, 1, 1, 1}, {1, 1, 1, 1, 1}};
 		System.out.println(st.solution(board3));
 		
+		int[][] board4 = {{1}};
+		System.out.println(st.solution(board4));
+		
 		
 	}
 
@@ -50,7 +53,66 @@ public class Lv_1_14 {
 class Solution14 {
 	public int solution(int[][] board) {
         int answer = 0;
-        return answer;
+        int size = board.length;
+        
+        if(size == 1){
+        	return board[0][0] == 1? 0:1;
+        } else if(board[0].length == 1 && board[1].length == 1) {
+        	return board[0][0] == 1 || board[1][0]== 1 ? 0:2;
+        }
+        
+        for(int i=0; i<size; i++) {
+        	
+        	for(int j=0; j<size; j++) {
+        		if(board[i][j] == 1) {
+        			answer++;
+        			continue;
+        		}
+        		
+        		if(i != 0 && i+1 != size && j != 0 && j+1 != size) {
+        			if(board[i-1][j-1] == 1 || board[i-1][j] == 1 || board[i-1][j+1] == 1
+        			|| board[i][j-1]   == 1 || board[i][j+1] == 1
+        			|| board[i+1][j-1] == 1 || board[i+1][j] == 1 || board[i+1][j+1] == 1) {
+        				answer++;
+        			}
+        		} else if(i == 0 && j == 0) {
+        			if(board[i+1][j] == 1|| board[i+1][j+1] == 1|| board[i][j+1] == 1) {
+        				answer++;
+        			}
+        		} else if(i == 0 && j+1 == size) {
+        			if(board[i+1][j] == 1|| board[i+1][j-1] == 1|| board[i][j-1] == 1) {
+        				answer++;
+        			}
+        		} else if(i+1 == size && j == 0) {
+        			if(board[i-1][j] == 1|| board[i-1][j+1] == 1|| board[i][j+1] == 1) {
+        				answer++;
+        			}
+        		} else if(i+1 == size && j+1 == size) {
+        			if(board[i][j-1] == 1|| board[i-1][j-1] == 1|| board[i-1][j] == 1) {
+        				answer++;
+        			}
+        		} else if(i == 0) {
+        			if(board[i][j-1] == 1 || board[i+1][j-1] == 1|| board[i][j+1] == 1|| board[i+1][j] == 1|| board[i+1][j+1] == 1) {
+        				answer++;
+        			}
+        		} else if(i+1 == size) {
+        			if(board[i][j-1] == 1 || board[i-1][j-1] == 1|| board[i-1][j] == 1|| board[i-1][j+1] == 1|| board[i][j+1] == 1) {
+        				answer++;
+        			}
+        		} else if(j == 0) {
+        			if(board[i-1][j] == 1 || board[i-1][j+1] == 1|| board[i][j+1] == 1|| board[i+1][j] == 1|| board[i+1][j+1] == 1) {
+        				answer++;
+        			}
+        		} else if(j+1 == size) {
+        			if(board[i-1][j] == 1 || board[i-1][j-1] == 1|| board[i][j-1] == 1|| board[i+1][j-1] == 1|| board[i+1][j] == 1) {
+        				answer++;
+        			}
+        		}
+        		
+        	}
+        }
+        
+        return size * size - answer;
     }
 }
 
