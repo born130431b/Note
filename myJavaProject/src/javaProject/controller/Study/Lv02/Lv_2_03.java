@@ -1,5 +1,7 @@
 package javaProject.controller.Study.Lv02;
 
+import java.util.Arrays;
+
 public class Lv_2_03 {
 	/*
 	 * 비내림차순으로 정렬된 수열이 주어질 때, 다음 조건을 만족하는 부분 수열을 찾으려고 합니다.
@@ -38,22 +40,49 @@ public class Lv_2_03 {
 		
 		int[] sequence = {1, 2, 3, 4, 5};
 		int k = 7;
-		System.out.println(st.solution(sequence, k));
+		System.out.println(Arrays.toString(st.solution(sequence, k)));
 		
 		int[] sequence2 = {1, 1, 1, 2, 3, 4, 5};
 		int k2 = 5;
-		System.out.println(st.solution(sequence2, k2));
+		System.out.println(Arrays.toString(st.solution(sequence2, k2)));
 		
 		int[] sequence3 = {2, 2, 2, 2, 2};
 		int k3 = 6;
-		System.out.println(st.solution(sequence3, k3));
+		System.out.println(Arrays.toString(st.solution(sequence3, k3)));
 	}
 
 }
 
 class solution3 {
 	public int[] solution(int[] sequence, int k) {
-        int[] answer = {};
+		
+		int N = sequence.length;
+        int left = 0;
+        int right = N;
+        int sum = 0;
+        
+        for(int L = 0, R = 0; L < N; L++) {
+            while(R < N && sum < k) {
+                sum += sequence[R++];
+            }
+            
+            if(sum == k) {
+                int range = R - L - 1;
+                if((right - left) > range) {
+                    left = L;
+                    right = R - 1;
+                }
+            }
+            
+            sum -= sequence[L];
+        }
+        
+        int[] answer = {left, right};
+        
         return answer;
     }
 }
+
+
+
+
