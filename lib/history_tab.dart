@@ -81,6 +81,7 @@ class _HistoryTabState extends State<HistoryTab> {
     }
   }
 
+  // 기록 삭제
   Future<void> _deletePlayer(String id) async {
     try {
       await _firestore
